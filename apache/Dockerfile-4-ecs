@@ -1,0 +1,15 @@
+FROM fedora:20
+MAINTAINER "Punit Porwal"
+
+RUN yum -y update && yum clean all
+RUN yum -y install httpd && yum clean all
+RUN echo "<center><a href="https://cloudnetes.blogspot.com"><span title="cloudnetes"> \
+         <img border='0' src="https://img.icons8.com/color/48/000000/money-heist-dali.png"/></span></a></center>" >> /var/www/html/index.html \
+         "<center>"CONGRATULATIONS! Your application is now running in a container in Amazon ECS"</center>" >> /var/www/html/index.html
+
+EXPOSE 80
+
+ADD run.sh /run.sh
+RUN chmod -v +x /run.sh
+
+CMD ["/run.sh"]
